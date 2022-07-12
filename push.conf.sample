@@ -1,0 +1,21 @@
+#
+# Astroberry push notifications main config file
+#
+
+### Push notifications backend selection ###
+# Uncomment following line to disable push notifications
+backend=none
+
+# Uncomment following line to simply log notifications to file
+# Useful for development and/or debug
+backend=log
+
+# Uncomment following line to use Gotify notification service
+# backend=gotify
+
+### Priority filter: every notification whose priority is lower
+### than min_priority_level is filtered out. Possible values are
+### verbose, info, warn, error (from the lowest to the highest priority).
+### If omitted, min_priority_level defaults to warn.
+min_priority_level=info
+

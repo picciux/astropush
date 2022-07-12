@@ -1,0 +1,286 @@
+[Event/AlignFailed]
+Action=Execute
+Execute=/usr/bin/astroberry-push "alignment" "Astrometric alignment failed with errors" error
+Logfile=
+TTS=
+
+[Event/AlignSuccessful]
+Action=Execute
+Execute=/usr/bin/astroberry-push "alignment" "Astrometric alignment completed " info
+Logfile=
+TTS=
+
+[Event/CalibrationFailed]
+Action=Execute
+Execute=/usr/bin/astroberry-push "guide" "Calibration failed with errors" error
+Logfile=
+TTS=
+
+[Event/CalibrationSuccessful]
+Action=Execute
+Execute=/usr/bin/astroberry-push "guide" "Calibration completed " info
+Logfile=
+TTS=
+
+[Event/CaptureFailed]
+Action=Execute
+Execute=/usr/bin/astroberry-push "capture" "Capture failed " error
+Logfile=
+Sound=
+TTS=
+
+[Event/CaptureSuccessful]
+Action=Execute
+Execute=/usr/bin/astroberry-push "capture" "Capture completed " info
+Logfile=
+Sound=
+TTS=
+
+[Event/DomeParked]
+Action=Execute
+Execute=/usr/bin/astroberry-push "kstars" "Dome parked" info
+Logfile=
+Sound=
+TTS=
+
+[Event/DomeParking]
+Action=Execute
+Execute=/usr/bin/astroberry-push "kstars" "Dome parking in progress" info
+Logfile=
+Sound=
+TTS=
+
+[Event/DomeUnparked]
+Action=Execute
+Execute=Execute=/usr/bin/astroberry-push "kstars" "Dome unparked" info
+Logfile=
+Sound=
+TTS=
+
+[Event/DomeUnparking]
+Action=Execute
+Execute=Execute=/usr/bin/astroberry-push "kstars" "Dome unparking in progress" info
+Logfile=
+Sound=
+TTS=
+
+[Event/EkosCaptureImageReceived]
+Action=Execute
+Execute=/usr/bin/astroberry-push "capture" "Image received" verbose
+Logfile=
+TTS=
+
+[Event/EkosScheduledImagingFinished]
+Action=Execute
+Execute=/usr/bin/astroberry-push "scheduler" "Sequence completed " info
+Logfile=
+Sound=
+TTS=
+
+[Event/EkosScheduledImagingStart]
+Action=Execute
+Execute=/usr/bin/astroberry-push "scheduler" "Sequence started " info
+Logfile=
+Sound=
+TTS=
+
+[Event/EkosSchedulerJobFail]
+Action=Execute
+Execute=/usr/bin/astroberry-push "scheduler" "Scheduled process failed " error
+Logfile=
+Sound=
+TTS=
+
+[Event/EkosSchedulerJobStart]
+Action=Execute
+Execute=/usr/bin/astroberry-push "scheduler" "Scheduled process started" info
+Logfile=
+Sound=
+TTS=
+
+[Event/EkosSchedulerTelescopeSynced]
+Action=Execute
+Execute=/usr/bin/astroberry-push "scheduler" "Telescope synced" info
+Logfile=
+Sound=
+TTS=
+
+[Event/FITSReceived]
+Action=Execute
+Execute=/usr/bin/astroberry-push "capture" "FITS image received" verbose
+Logfile=
+TTS=
+
+[Event/FilterWheelChanged]
+Action=Execute
+Execute=Execute=/usr/bin/astroberry-push "capture" "Filter changed" info
+Logfile=
+Sound=
+TTS=
+
+[Event/FocusFailed]
+Action=Execute
+Execute=/usr/bin/astroberry-push "focus" "Focusing failed with errors " error
+Logfile=
+TTS=
+
+[Event/FocusStarted]
+Action=Execute
+Execute=/usr/bin/astroberry-push "focus" "Focusing in progress" info
+Logfile=
+Sound=
+TTS=
+
+[Event/FocusSuccessful]
+Action=Execute
+Execute=/usr/bin/astroberry-push "focus" "Focusing completed" info
+Logfile=
+TTS=
+
+[Event/GuideFailed]
+Action=Execute
+Execute=/usr/bin/astroberry-push "guide" "Guide failed with errors" error
+Logfile=
+TTS=
+
+[Event/IndiServerMessage]
+Execute=
+Logfile=
+Sound=
+TTS=
+
+[Event/KnownIssue]
+Execute=
+Logfile=
+Sound=
+TTS=
+
+[Event/MeridianFlipCompleted]
+Action=Execute
+Execute=/usr/bin/astroberry-push "mount" "Meridian flip completed" info
+Logfile=
+Sound=
+TTS=
+
+[Event/MeridianFlipFailed]
+Action=Execute
+Execute=/usr/bin/astroberry-push "mount" "Meridian flip failed" error
+Logfile=
+Sound=
+TTS=
+
+[Event/MeridianFlipStarted]
+Action=Execute
+Execute=/usr/bin/astroberry-push "mount" "Meridian flip started" info
+Logfile=
+Sound=
+TTS=
+
+[Event/MotionCompleted]
+Action=Execute
+Execute=/usr/bin/astroberry-push "mount" "Motion completed" info
+Logfile=
+Sound=
+TTS=
+
+[Event/MotionStarted]
+Action=Execute
+Execute=/usr/bin/astroberry-push "mount" "Motion started" info
+Logfile=
+Sound=
+TTS=
+
+[Event/MountAborted]
+Action=Execute
+Execute=/usr/bin/astroberry-push "mount" "Mount aborted" warn
+Logfile=
+Sound=
+TTS=
+
+[Event/MountParked]
+Action=Execute
+Execute=/usr/bin/astroberry-push "mount" "Mount parked" info
+Logfile=
+Sound=
+TTS=
+
+[Event/MountParking]
+Action=Execute
+Execute=/usr/bin/astroberry-push "mount" "Mount parking in progress" info
+Logfile=
+Sound=
+TTS=
+
+[Event/MountParkingFailed]
+Action=Execute
+Execute=/usr/bin/astroberry-push "mount" "Mount parking failed" error
+Logfile=
+Sound=
+TTS=
+
+[Event/MountUnparked]
+Action=Execute
+Execute=/usr/bin/astroberry-push "mount" "Mount unparked" info
+Logfile=
+Sound=
+TTS=
+
+[Event/ObservatoryShutdown]
+Action=Execute
+Execute=/usr/bin/astroberry-push "scheduler" "Observatory shutdown in progress" info
+Logfile=
+Sound=
+TTS=
+
+[Event/ObservatoryStartup]
+Action=Execute
+Execute=/usr/bin/astroberry-push "scheduler" "Observatory startup in progress" info
+Logfile=
+Sound=
+TTS=
+
+[Event/RecordingStarted]
+Action=Execute
+Execute=/usr/bin/astroberry-push "capture" "Recording started" info
+Logfile=
+Sound=
+TTS=
+
+[Event/RecordingStopped]
+Action=Execute
+Execute=/usr/bin/astroberry-push "capture" "Recording stopped" info
+Logfile=
+Sound=
+TTS=
+
+[Event/SchedulerAborted]
+Action=Execute
+Execute=/usr/bin/astroberry-push "scheduler" "Scheduler aborted" warn
+Logfile=
+TTS=
+
+[Event/SlewCompleted]
+Action=Execute
+Execute=/usr/bin/astroberry-push "mount" "Mount slew completed" info
+Logfile=
+Sound=
+TTS=
+
+[Event/SlewStarted]
+Action=Execute
+Execute=/usr/bin/astroberry-push "mount" "Mount slew started" info
+Logfile=
+Sound=
+TTS=
+
+[Event/WeatherAlert]
+Action=Execute
+Execute=/usr/bin/astroberry-push "kstars" "Weather alert. Observatory will be shutdown" warn
+Logfile=
+TTS=
+
+[Event/WeatherWarning]
+Action=Execute
+Execute=/usr/bin/astroberry-push "kstars" "Weather warning" warn
+Logfile=
+TTS=

@@ -1,0 +1,103 @@
+#! /bin/bash
+
+#    Astroberry-Push. A simple push notification layer for Astroberry.
+#    Copyright (C) 2022  Matteo Piscitelli <matteo@matteopiscitelli.it>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# Astroberry push notifications front-end
+# SYNOPSIS 
+#
+#   astroberry-push <module> <message> [<priority>]
+#
+# where:
+#   <module> is one of: astroberry, kstars, alignment, capture, focus, guide, mount, scheduler
+#   <message> is the notification message
+#   <priority> it one of: verbose, info, warn, error. If omitted defaults to warn.
+
+print_usage() {
+  echo SYNOPSIS
+  echo "  $0 <module> <message> [priority]"
+  echo
+}
+
+CONFIG_DIR="/etc/astroberry-push"
+CONFIG_FILE="$CONFIG_DIR/push.conf"
+BACKENDS_DIR="/usr/share/astroberry-push/backends"
+
+if [ $# -lt 2 ]; then
+  echo "ERROR: missing argument" 1>&2
+  print_usage
+  exit 1
+fi
+
+min_priority_level=warn
+
+if [ ! -e "$CONFIG_FILE" ]; then
+    echo "ERROR: missing config file 'CONFIG_FILE'" 1>&2
+    exit 1
+fi
+
+source $CONFIG_DIR/push.conf
+if [ "$backend" = "none" -o "$backend" = "" ]; then
+  exit 0
+fi
+
+source $BACKENDS_DIR/$backend/backend.sh
+
+case "$3" in
+  "verbose")
+    req_prio=1
+    ;;
+
+  "info")
+    req_prio=2
+    ;;
+
+  "warn")
+    req_prio=3
+    ;;
+
+  "error")
+    req_prio=4
+    ;;
+
+  *)
+    req_prio=3
+    ;;
+esac
+
+case $min_priority_level in
+  verbose)
+    minlevel=1
+    ;;
+
+  info)
+    minlevel=2
+    ;;
+
+  warn)
+    minlevel=3
+    ;;
+
+  error)
+    minlevel=4
+    ;;
+esac
+
+if [ $req_prio -ge $minlevel ]; then
+  push_$backend  "$1" "$2" $req_prio
+fi
+
+
