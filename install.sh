@@ -80,6 +80,7 @@ if [ "$UNINSTALL" = "yes" ]; then
     sudo rm -R $PREFIX/etc/astroberry-push
     sudo rm -R $PREFIX/usr/share/astroberry-push
     sudo rm $PREFIX/usr/bin/astroberry-push
+    sudo rm $PREFIX/usr/bin/notify-indi-watchdog
     if [ -e  "$HOME/.config/kstars.notifyrc" ]; then
         rm $HOME/.config/kstars.notifyrc
         if [ -f $HOME/.config/kstars.notifyrc.bak ]; then
@@ -96,10 +97,13 @@ make_dirs() {
     sudo mkdir -p $PREFIX/usr/share/astroberry-push/backends
     mkdir -p $PREFIX/$HOME/.config
 }
-
 do_install() {
     make_dirs
+    # install -D --mode=755 "$MYDIR/astroberry-push" $PREFIX/usr/bin/
+    # install -D --mode=755 "$MYDIR/notify-indi-watchdog" $PREFIX/usr/bin/
+    # install -D --mode=644 "$MYDIR/push.conf.sample" $PREFIX/etc/astroberry-push/push.conf
     sudo cp "$MYDIR/astroberry-push" $PREFIX/usr/bin/
+    sudo cp "$MYDIR/notify-indi-watchdog" $PREFIX/usr/bin/notify-indi-watchdog
     sudo cp "$MYDIR/push.conf.sample" $PREFIX/etc/astroberry-push/push.conf
 }
 
