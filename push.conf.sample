@@ -1,5 +1,5 @@
 #
-# Astroberry push notifications main config file
+# AstroPush notifications main config file
 #
 
 ### Push notifications backend selection ###
@@ -12,6 +12,9 @@ backend=log
 
 # Uncomment following line to use Gotify notification service
 # backend=gotify
+
+# Uncomment following line to use Pushover notification service
+# backend=pushover
 
 ### Priority filter: every notification whose priority is lower
 ### than min_priority_level is filtered out. Possible values are

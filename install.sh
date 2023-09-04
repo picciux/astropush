@@ -1,6 +1,6 @@
 #! /bin/bash
 
-#    Astroberry-Push. A simple push notification layer for Astroberry.
+#    AstroPush. A simple push notification layer for KStars/Ekos on linux.
 #    Copyright (C) 2022  Matteo Piscitelli <matteo@matteopiscitelli.it>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -76,10 +76,10 @@ done
 MYDIR=$( dirname $0 )
 
 if [ "$UNINSTALL" = "yes" ]; then
-    echo "### Uninstalling astroberry-push..."
-    sudo rm -R $PREFIX/etc/astroberry-push
-    sudo rm -R $PREFIX/usr/share/astroberry-push
-    sudo rm $PREFIX/usr/bin/astroberry-push
+    echo "### Uninstalling astropush..."
+    sudo rm -R $PREFIX/etc/astropush
+    sudo rm -R $PREFIX/usr/share/astropush
+    sudo rm $PREFIX/usr/bin/astropush
     sudo rm $PREFIX/usr/bin/notify-indi-watchdog
     if [ -e  "$HOME/.config/kstars.notifyrc" ]; then
         rm $HOME/.config/kstars.notifyrc
@@ -92,35 +92,35 @@ if [ "$UNINSTALL" = "yes" ]; then
 fi
 
 make_dirs() {
-    sudo mkdir -p $PREFIX/etc/astroberry-push
+    sudo mkdir -p $PREFIX/etc/astropush
     sudo mkdir -p $PREFIX/usr/bin
-    sudo mkdir -p $PREFIX/usr/share/astroberry-push/backends
+    sudo mkdir -p $PREFIX/usr/share/astropush/backends
     mkdir -p $PREFIX/$HOME/.config
 }
 do_install() {
     make_dirs
-    # install -D --mode=755 "$MYDIR/astroberry-push" $PREFIX/usr/bin/
+    # install -D --mode=755 "$MYDIR/astropush" $PREFIX/usr/bin/
     # install -D --mode=755 "$MYDIR/notify-indi-watchdog" $PREFIX/usr/bin/
-    # install -D --mode=644 "$MYDIR/push.conf.sample" $PREFIX/etc/astroberry-push/push.conf
-    sudo cp "$MYDIR/astroberry-push" $PREFIX/usr/bin/
+    # install -D --mode=644 "$MYDIR/push.conf.sample" $PREFIX/etc/astropush/push.conf
+    sudo cp "$MYDIR/astropush" $PREFIX/usr/bin/
     sudo cp "$MYDIR/notify-indi-watchdog" $PREFIX/usr/bin/notify-indi-watchdog
-    sudo cp "$MYDIR/push.conf.sample" $PREFIX/etc/astroberry-push/push.conf
+    sudo cp "$MYDIR/push.conf.sample" $PREFIX/etc/astropush/push.conf
 }
 
 do_live_install() {
     make_dirs
-    sudo ln -s $( realpath "$MYDIR/astroberry-push" ) $PREFIX/usr/bin/
-    sudo ln -s $( realpath "$MYDIR/push.conf.sample" ) $PREFIX/etc/astroberry-push/push.conf
+    sudo ln -s $( realpath "$MYDIR/astropush" ) $PREFIX/usr/bin/
+    sudo ln -s $( realpath "$MYDIR/push.conf.sample" ) $PREFIX/etc/astropush/push.conf
 }
 
 install_kstars_notifyrc() {
     if [ -f "$PREFIX/$HOME/.config/kstars.notifyrc" ]; then
         echo 'You appear to already have a KStars notification config: you can choose to overwrite'
-        echo 'it to let KStars notifications to go through astroberry-push. Note that overwriting'
+        echo 'it to let KStars notifications to go through astropush. Note that overwriting'
         echo 'will disable any previous config you made. Anyways, your current notification'
         echo "config will be saved to '$PREFIX/$HOME/.config/kstars.notifyrc.bak'. If you choose not to"
         echo "overwrite it, you'll have to setup notifications through KStars UI to let them go"
-        echo "through astroberry-push: read 'kstars.notifyrc' in this package as a starting "
+        echo "through astropush: read 'kstars.notifyrc' in this package as a starting "
         echo 'point.'
         read -p "Do you want to overwrite '$PREFIX/$HOME/.config/kstars.notifyrc' (yes/no)?" overwrite
         if [ "$overwrite" = "yes" ]; then
@@ -135,7 +135,7 @@ install_kstars_notifyrc() {
     fi
 }
 
-echo "### Installing astroberry-push..."
+echo "### Installing astropush..."
 
 if [ "$LIVE_INSTALL" = "yes" ]; then
     do_live_install

@@ -15,7 +15,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Astroberry-Push log backend install script                 #
+# AstroPush log backend install script                 #
 
 PREFIX=
 LIVE_INSTALL=no
@@ -74,37 +74,37 @@ done
 
 MYDIR=$( dirname $0 )
 
-if [ ! -d $PREFIX/etc/astroberry-push ]; then
+if [ ! -d $PREFIX/etc/astropush ]; then
     echo "Error: config directory missing. Is frontend installed?" 1>&2
     exit 1
 fi
 
-if [ ! -d $PREFIX/usr/share/astroberry-push/backends ]; then
+if [ ! -d $PREFIX/usr/share/astropush/backends ]; then
     echo "Error: backends directory missing. Is frontend installed?" 1>&2
     exit 1
 fi
 
 if [ "$UNINSTALL" = "yes" ]; then
-    echo "### Uninstalling astroberry-push log backend..."
-    sudo rm $PREFIX/etc/astroberry-push/backend.log.conf
-    sudo rm -R $PREFIX/usr/share/astroberry-push/backends/log
+    echo "### Uninstalling astropush log backend..."
+    sudo rm $PREFIX/etc/astropush/backend.log.conf
+    sudo rm -R $PREFIX/usr/share/astropush/backends/log
     echo "### Done!"
     exit 0
 fi
 
-echo "### Installing astroberry-push log backend..."
+echo "### Installing astropush log backend..."
 
 if [ "$LIVE_INSTALL" = "yes" ]; then
-    sudo ln -s $( realpath "$MYDIR" ) $PREFIX/usr/share/astroberry-push/backends/
-    sudo ln -s $( realpath "$MYDIR/backend.log.conf" ) $PREFIX/etc/astroberry-push/
+    sudo ln -s $( realpath "$MYDIR" ) $PREFIX/usr/share/astropush/backends/
+    sudo ln -s $( realpath "$MYDIR/backend.log.conf" ) $PREFIX/etc/astropush/
 else
-    sudo mkdir -p $PREFIX/usr/share/astroberry-push/backends/log
-    sudo cp $MYDIR/backend.sh $PREFIX/usr/share/astroberry-push/backends/log/
-    sudo cp $MYDIR/backend.log.conf $PREFIX/etc/astroberry-push
+    sudo mkdir -p $PREFIX/usr/share/astropush/backends/log
+    sudo cp $MYDIR/backend.sh $PREFIX/usr/share/astropush/backends/log/
+    sudo cp $MYDIR/backend.log.conf $PREFIX/etc/astropush
 fi
 
 echo "### Log backend installed!"
-echo "### Don't forget to enable it editing /etc/astroberry-push/push.conf"
+echo "### Don't forget to enable it editing /etc/astropush/push.conf"
 echo
 
 
