@@ -20,6 +20,7 @@ The frontend has the following syntax:
     astropush <module> <message> [<priority>]
     
 where:
+
 - **module** is the module generating the notification; it corresponds to KStars Ekos modules, plus two more general modules, and should be one of:
     - os
     - kstars
@@ -54,9 +55,10 @@ The backend can have its configuration file: if present, it usually is located i
 
 AstroPush provides a simple testing/debugging backend called **Log**, which, guess what, simply logs received notifications to a text file: its config file `/etc/AstroPush/backend.log.conf` merely let us choose the path and name of the log file; keep in mind that AstroPush (and related backend) will run under the same user Kstars is running under, so take care that user has the rights to write to the log file. You can find it in *log-backend* subdir inside this package, together with its installation script.
 
-I developed also 
+I developed also:
+
 - a backend for [Gotify](https://gotify.net/) push notification server: it allows me to have a working notification system in the wild without an internet connection (that is where I photograph the most). It's source is available at [this Github repo](https://github.com/picciux/AstroPush-backend-gotify.git) where you'll find relevant documentation.
-- a backend fot [Pushover] (https://pushover.net/) service. It's a paid service to deliver push notifications to any device. Get source at [this GitHub repo] (https://github.com/picciux/astroberry-push-backend-pushover.git).
+- a backend fot [Pushover](https://pushover.net/) service. It's a paid service to deliver push notifications to any device. Get source at [this GitHub repo](https://github.com/picciux/astroberry-push-backend-pushover.git).
 
 ### Developing new backends
 The backend is a bash script that will be sourced (not executed) by the frontend. The frontend expects to find the backend in a directory under its backends path (`/usr/share/AstroPush/backends`) named after the backend name (the same name configured in push.conf), in a file named `backend.sh`. When the frontend needs to forward a notification, it will source the backend script, and try to execute a function named `push_<backend-name>` with following parameters:
