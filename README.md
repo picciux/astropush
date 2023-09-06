@@ -57,7 +57,7 @@ AstroPush provides a simple testing/debugging backend called **Log**, which, gue
 
 I developed also:
 
-- a backend for [Gotify](https://gotify.net/) push notification server: it allows me to have a working notification system in the wild without an internet connection (that is where I photograph the most). It's source is available at [this Github repo](https://github.com/picciux/AstroPush-backend-gotify.git) where you'll find relevant documentation.
+- a backend for [Gotify](https://gotify.net/) push notification server: it allows me to have a working notification system in the wild without an internet connection (that is where I photograph the most). It's source is available at [this Github repo](https://github.com/picciux/astropush-backend-gotify.git) where you'll find relevant documentation.
 - a backend fot [Pushover](https://pushover.net/) service. It's a paid service to deliver push notifications to any device. Get source at [this GitHub repo](https://github.com/picciux/astroberry-push-backend-pushover.git).
 
 ### Developing new backends
