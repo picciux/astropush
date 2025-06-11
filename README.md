@@ -1,7 +1,7 @@
 
 # AstroPush
 
-***A simple push notification abstraction layer for or any linux platform with KStars/Ekos.***
+***A simple push notification abstraction layer for any linux platform with KStars/Ekos.***
 
 
 Standing during an all-night-long deep sky photography session could be hard, especially if you have to conciliate other activities (going to work in the morning, to say...). [KStars and Ekos](https://edu.kde.org/kstars/) offer a fully-automated observatory environment, but we all know that something can go wrong requiring our intervention; since KStars provides a fully configurable notification system, I came up with the idea of abstracting the actual push notification transport using a simple frontend/backend architecture: the frontend offers a constant interface for KStars to send notifications to, forwarding them to the configured backend, that in turn will carry on through the actual push notifications transport.
