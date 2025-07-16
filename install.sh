@@ -91,6 +91,7 @@ do_install() {
     install -m 644 "$MYDIR/push.conf.sample" $PREFIX/etc/astropush/push.conf
     install -m 644 "$MYDIR/kstars.notifyrc" $PREFIX/usr/share/astropush/kstars.notifyrc
     install -m 644 "$MYDIR/LICENSE" "$MYDIR/README.md" $PREFIX/usr/share/doc/astropush/
+    install -m 644 "$MYDIR/backends.txt" $PREFIX/usr/share/astropush/backends
 }
 
 do_install
