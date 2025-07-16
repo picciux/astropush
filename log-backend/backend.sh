@@ -21,7 +21,11 @@ if [ ! -f "$CONFIG_DIR/backend.log.conf" ]; then
     exit 1
 fi
 
+# source system config
 source "$CONFIG_DIR/backend.log.conf"
+
+# override with user config
+[ -f "$USER_CONFIG_BE_PREFIX.log.conf" ] && source $USER_CONFIG_BE_PREFIX.log.conf
 
 push_log() {
     case $3 in
