@@ -16,6 +16,8 @@
 
 # Log backend implementation
 
+BACKEND_VERSION=1.1
+
 if [ ! -f "$CONFIG_DIR/backend.log.conf" ]; then
     echo "Missing backend config file '$CONFIG_DIR/backend.log.conf" 1>&2
     exit 1

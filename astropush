@@ -26,7 +26,7 @@
 #   <message> is the notification message
 #   <priority> it one of: verbose, info, warn, error. If omitted defaults to warn.
 
-VERSION="1.0"
+VERSION="1.1"
 
 print_usage() {
   echo SYNOPSIS
