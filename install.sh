@@ -26,7 +26,6 @@ print_usage() {
     echo " USAGE: $0 [options]"
     echo "   OPTIONS"
     echo "    -p, --prefix <prefix>        prepend <prefix> to file installation paths"
-    echo "    -l, --live                   symlink file from files in package instead of copying" 
     echo "    -u, --uninstall              uninstall previously installed files"
     echo "    -h, --help                   prints this help"
     echo
@@ -56,10 +55,6 @@ for o in $OPTS; do
     esac
     
     case $o in
-        --live|-l)
-            LIVE_INSTALL=yes
-            ;;
-            
         --uninstall|-u)
             UNINSTALL=yes
             ;;
@@ -77,73 +72,28 @@ MYDIR=$( dirname $0 )
 
 if [ "$UNINSTALL" = "yes" ]; then
     echo "### Uninstalling astropush..."
-    sudo rm -R $PREFIX/etc/astropush
-    sudo rm -R $PREFIX/usr/share/astropush
-    sudo rm $PREFIX/usr/bin/astropush
-    sudo rm $PREFIX/usr/bin/notify-indi-watchdog
-    if [ -e  "$HOME/.config/kstars.notifyrc" ]; then
-        rm $HOME/.config/kstars.notifyrc
-        if [ -f $HOME/.config/kstars.notifyrc.bak ]; then
-            mv $HOME/.config/kstars.notifyrc.bak $HOME/.config/kstars.notifyrc
-        fi
-    fi
+    rm -R $PREFIX/etc/astropush
+    rm -R $PREFIX/usr/share/astropush
+    rm -R $PREFIX/usr/share/doc/astropush
+    rm $PREFIX/usr/bin/astropush
+    rm $PREFIX/usr/bin/notify-indi-watchdog
     echo "### Done!"
     exit 0
 fi
 
-make_dirs() {
-    sudo mkdir -p $PREFIX/etc/astropush
-    sudo mkdir -p $PREFIX/usr/bin
-    sudo mkdir -p $PREFIX/usr/share/astropush/backends
-    mkdir -p $PREFIX/$HOME/.config
-}
 do_install() {
-    make_dirs
-    # install -D --mode=755 "$MYDIR/astropush" $PREFIX/usr/bin/
-    # install -D --mode=755 "$MYDIR/notify-indi-watchdog" $PREFIX/usr/bin/
-    # install -D --mode=644 "$MYDIR/push.conf.sample" $PREFIX/etc/astropush/push.conf
-    sudo cp "$MYDIR/astropush" $PREFIX/usr/bin/
-    sudo cp "$MYDIR/notify-indi-watchdog" $PREFIX/usr/bin/notify-indi-watchdog
-    sudo cp "$MYDIR/push.conf.sample" $PREFIX/etc/astropush/push.conf
+    install -d $PREFIX/usr/bin
+    install -d $PREFIX/etc/astropush
+    install -d $PREFIX/usr/share/astropush
+    install -d $PREFIX/usr/share/doc/astropush
+
+    install "$MYDIR/astropush" "$MYDIR/notify-indi-watchdog" $PREFIX/usr/bin
+    install -m 644 "$MYDIR/push.conf.sample" $PREFIX/etc/astropush/push.conf
+    install -m 644 "$MYDIR/kstars.notifyrc" $PREFIX/usr/share/astropush/kstars.notifyrc
+    install -m 644 "$MYDIR/LICENSE" "$MYDIR/README.md" $PREFIX/usr/share/doc/astropush/
 }
 
-do_live_install() {
-    make_dirs
-    sudo ln -s $( realpath "$MYDIR/astropush" ) $PREFIX/usr/bin/
-    sudo ln -s $( realpath "$MYDIR/push.conf.sample" ) $PREFIX/etc/astropush/push.conf
-}
-
-install_kstars_notifyrc() {
-    if [ -f "$PREFIX/$HOME/.config/kstars.notifyrc" ]; then
-        echo 'You appear to already have a KStars notification config: you can choose to overwrite'
-        echo 'it to let KStars notifications to go through astropush. Note that overwriting'
-        echo 'will disable any previous config you made. Anyways, your current notification'
-        echo "config will be saved to '$PREFIX/$HOME/.config/kstars.notifyrc.bak'. If you choose not to"
-        echo "overwrite it, you'll have to setup notifications through KStars UI to let them go"
-        echo "through astropush: read 'kstars.notifyrc' in this package as a starting "
-        echo 'point.'
-        read -p "Do you want to overwrite '$PREFIX/$HOME/.config/kstars.notifyrc' (yes/no)?" overwrite
-        if [ "$overwrite" = "yes" ]; then
-            mv $PREFIX/$HOME/.config/kstars.notifyrc $PREFIX/$HOME/.config/kstars.notifyrc.bak
-        fi
-    fi
-    
-    if [ "$LIVE_INSTALL" = "yes" ]; then
-        ln -s $( realpath "$MYDIR/kstars.notifyrc" ) $PREFIX/$HOME/.config/
-    else
-        cp "$MYDIR/kstars.notifyrc" $PREFIX/$HOME/.config/
-    fi
-}
-
-echo "### Installing astropush..."
-
-if [ "$LIVE_INSTALL" = "yes" ]; then
-    do_live_install
-    install_kstars_notifyrc
-else
-    do_install
-    install_kstars_notifyrc
-fi
+do_install
 
 echo "### Done!"
 echo
