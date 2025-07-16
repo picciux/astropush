@@ -84,7 +84,7 @@ fi
 do_install() {
     install -d $PREFIX/usr/bin
     install -d $PREFIX/etc/astropush
-    install -d $PREFIX/usr/share/astropush
+    install -d $PREFIX/usr/share/astropush/backends
     install -d $PREFIX/usr/share/doc/astropush
 
     install "$MYDIR/astropush" "$MYDIR/notify-indi-watchdog" $PREFIX/usr/bin
