@@ -1,7 +1,7 @@
 
 # AstroPush
 
-***A simple push notification abstraction layer for or any linux platform with KStars/Ekos.***
+***A simple push notification abstraction layer for any linux platform with KStars/Ekos.***
 
 
 Standing during an all-night-long deep sky photography session could be hard, especially if you have to conciliate other activities (going to work in the morning, to say...). [KStars and Ekos](https://edu.kde.org/kstars/) offer a fully-automated observatory environment, but we all know that something can go wrong requiring our intervention; since KStars provides a fully configurable notification system, I came up with the idea of abstracting the actual push notification transport using a simple frontend/backend architecture: the frontend offers a constant interface for KStars to send notifications to, forwarding them to the configured backend, that in turn will carry on through the actual push notifications transport.
@@ -20,6 +20,7 @@ The frontend has the following syntax:
     astropush <module> <message> [<priority>]
     
 where:
+
 - **module** is the module generating the notification; it corresponds to KStars Ekos modules, plus two more general modules, and should be one of:
     - os
     - kstars
@@ -52,14 +53,15 @@ The backend can have its configuration file: if present, it usually is located i
 
 ### Backends
 
-AstroPush provides a simple testing/debugging backend called **Log**, which, guess what, simply logs received notifications to a text file: its config file `/etc/AstroPush/backend.log.conf` merely let us choose the path and name of the log file; keep in mind that AstroPush (and related backend) will run under the same user Kstars is running under, so take care that user has the rights to write to the log file. You can find it in *log-backend* subdir inside this package, together with its installation script.
+AstroPush provides a simple testing/debugging backend called **Log**, which, guess what, simply logs received notifications to a text file: its config file `/etc/astropush/backend.log.conf` merely let us choose the path and name of the log file; keep in mind that AstroPush (and related backend) will run under the same user Kstars is running under, so take care that user has the rights to write to the log file. You can find it in *log-backend* subdir inside this package, together with its installation script.
 
-I developed also 
-- a backend for [Gotify](https://gotify.net/) push notification server: it allows me to have a working notification system in the wild without an internet connection (that is where I photograph the most). It's source is available at [this Github repo](https://github.com/picciux/AstroPush-backend-gotify.git) where you'll find relevant documentation.
-- a backend fot [Pushover] (https://pushover.net/) service. It's a paid service to deliver push notifications to any device. Get source at [this GitHub repo] (https://github.com/picciux/astroberry-push-backend-pushover.git).
+I developed also:
+
+- a backend for [Gotify](https://gotify.net/) push notification server: it allows me to have a working notification system in the wild without an internet connection (that is where I photograph the most). It's source is available at [this Github repo](https://github.com/picciux/astropush-backend-gotify.git) where you'll find relevant documentation.
+- a backend fot [Pushover](https://pushover.net/) service. It's a paid service to deliver push notifications to any device. Get source at [this GitHub repo](https://github.com/picciux/astropush-backend-pushover.git).
 
 ### Developing new backends
-The backend is a bash script that will be sourced (not executed) by the frontend. The frontend expects to find the backend in a directory under its backends path (`/usr/share/AstroPush/backends`) named after the backend name (the same name configured in push.conf), in a file named `backend.sh`. When the frontend needs to forward a notification, it will source the backend script, and try to execute a function named `push_<backend-name>` with following parameters:
+The backend is a bash script that will be sourced (not executed) by the frontend. The frontend expects to find the backend in a directory under its backends path (`/usr/share/astropush/backends`) named after the backend name (the same name configured in push.conf), in a file named `backend.sh`. When the frontend needs to forward a notification, it will source the backend script, and try to execute a function named `push_<backend-name>` with following parameters:
 
     push_<backend-name> <module> <message> <priority>
     
@@ -74,7 +76,7 @@ What to do with this data, is responsibility of the backend implementation itsel
 
 ### Project home
 
-Project home is [this Github repo](https://github.com/picciux/AstroPush.git).
+Project home is [this Github repo](https://github.com/picciux/astropush.git).
 
 ### Licensing
 

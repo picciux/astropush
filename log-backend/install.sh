@@ -18,14 +18,12 @@
 # AstroPush log backend install script                 #
 
 PREFIX=
-LIVE_INSTALL=no
 UNINSTALL=no
 
 print_usage() {
     echo " USAGE: $0 [options]"
     echo "   OPTIONS"
     echo "    -p, --prefix <prefix>        prepend <prefix> to file installation paths"
-    echo "    -l, --live                   symlink file from files in package instead of copying" 
     echo "    -u, --uninstall              uninstall previously installed files"
     echo "    -h, --help                   prints this help"
     echo
@@ -55,10 +53,6 @@ for o in $OPTS; do
     esac
     
     case $o in
-        --live|-l)
-            LIVE_INSTALL=yes
-            ;;
-            
         --uninstall|-u)
             UNINSTALL=yes
             ;;
@@ -86,25 +80,19 @@ fi
 
 if [ "$UNINSTALL" = "yes" ]; then
     echo "### Uninstalling astropush log backend..."
-    sudo rm $PREFIX/etc/astropush/backend.log.conf
-    sudo rm -R $PREFIX/usr/share/astropush/backends/log
+    rm $PREFIX/etc/astropush/backend.log.conf
+    rm -R $PREFIX/usr/share/astropush/backends/log
     echo "### Done!"
     exit 0
 fi
 
 echo "### Installing astropush log backend..."
 
-if [ "$LIVE_INSTALL" = "yes" ]; then
-    sudo ln -s $( realpath "$MYDIR" ) $PREFIX/usr/share/astropush/backends/
-    sudo ln -s $( realpath "$MYDIR/backend.log.conf" ) $PREFIX/etc/astropush/
-else
-    sudo mkdir -p $PREFIX/usr/share/astropush/backends/log
-    sudo cp $MYDIR/backend.sh $PREFIX/usr/share/astropush/backends/log/
-    sudo cp $MYDIR/backend.log.conf $PREFIX/etc/astropush
-fi
+install -d $PREFIX/usr/share/astropush/backends/log
+install -m 644 $MYDIR/backend.sh $PREFIX/usr/share/astropush/backends/log/
+install -m 644 $MYDIR/backend.log.conf $PREFIX/etc/astropush
 
 echo "### Log backend installed!"
 echo "### Don't forget to enable it editing /etc/astropush/push.conf"
 echo
-
 
