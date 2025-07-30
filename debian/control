@@ -1,0 +1,21 @@
+Source: astropush
+Section: unknown
+Priority: optional
+Maintainer: Matteo Piscitelli <matteo@matteopiscitelli.it>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+Homepage: https://github.com/picciux/astropush.git
+Rules-Requires-Root: no
+#Vcs-Git: https://github.com/picciux/astropush.git
+#Vcs-Browser: https://github.com/picciux/astropush.git
+
+Package: astropush
+Architecture: all
+Multi-Arch: foreign
+Depends: bash
+Suggests: kstars
+Description: Simple push notification abstraction layer for Kstars/Ekos.
+ Astropush is writenn with robotic astronomic observatory in mind:
+ it provides an abstraction layer between KStars notification system,
+ and one of many push notification transports (from simple email to the
+ most fancy paid notification service).

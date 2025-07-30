@@ -1,0 +1,6 @@
+astropush for Debian
+
+Simple push notification abstraction layer for Kstars/Ekos. Check
+https://github.com/picciux/astropush for documentation.
+
+ -- Matteo Piscitelli <matteo@matteopiscitelli.it>  Mon, 28 Jul 2025 01:25:31 +0200

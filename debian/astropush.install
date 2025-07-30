@@ -1,0 +1,4 @@
+astropush /usr/bin
+notify-indi-watchdog /usr/bin
+push.conf.sample /etc/astropush
+kstars.notifyrc /usr/share/astropush

@@ -1,0 +1,5 @@
+debian/.debhelper/
+debian/astropush.substvars
+debian/astropush/
+debian/debhelper-build-stamp
+debian/files
