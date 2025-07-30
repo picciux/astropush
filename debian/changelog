@@ -1,3 +1,9 @@
+astropush (1.1-1) bookworm; urgency=low
+
+  * Astropush release 1.1
+
+ -- Matteo Piscitelli <matteo@matteopiscitelli.it>  Thu, 31 Jul 2025 00:10:32 +0200
+
 astropush (1.0-1) bookworm; urgency=low
 
   * Astropush release 1.0.
