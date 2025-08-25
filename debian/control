@@ -10,7 +10,7 @@ Rules-Requires-Root: no
 Package: astropush
 Architecture: all
 Multi-Arch: foreign
-Depends: ${misc:Depends}, bash
+Depends: ${misc:Depends}, bash (>= 5.2.15)
 Suggests: kstars
 Description: Simple push notification abstraction layer for Kstars/Ekos.
  Astropush is writenn with robotic astronomic observatory in mind:
